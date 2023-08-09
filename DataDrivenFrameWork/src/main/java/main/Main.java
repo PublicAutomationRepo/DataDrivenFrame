@@ -51,9 +51,19 @@ public class Main implements ITestListener {
 	}
 
 	@AfterMethod
-	public void after() {
+	public void after(ITestResult result) {
 
 		System.out.println("After Method");
+		int status = result.getStatus();
+		if (status==ITestResult.SUCCESS) {
+			test.pass("Test Passed");
+		}else if (status==ITestResult.FAILURE){
+			
+			test.fail("Test Failed");
+		}
+		
+		
+		
 		driver.quit();
 	}
 
@@ -68,7 +78,7 @@ public class Main implements ITestListener {
 		case CHROME:
 
 			// String path = System.getProperty("user.dir")+"\\Drivers\\chrome.exe";
-			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"\\Drivers\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"//Drivers//chromedriver");
 			driver = new ChromeDriver();
 			break;
 
